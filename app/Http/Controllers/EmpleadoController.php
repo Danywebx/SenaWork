@@ -32,7 +32,7 @@ class EmpleadoController extends Controller
         $data = $this->filtrarEmpleos($request);
         $categorias = Categoria::all();
         $empleos = Empleo::where('estado', 1)
-            ->where('estado_empleo', 'Publicado')
+            ->where('estado', 'Publicado')
             ->where('usuario_id', '!=', Auth::user()->id)
             ->get();
 

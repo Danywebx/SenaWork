@@ -141,13 +141,11 @@ class AuthController extends Controller
 
         Empleo::where('usuario_id', $usuario->id)
             ->update([
-                'estado_empleo' => 'Eliminado',
                 'estado' => 0
             ]);
 
         Postulacion::where('usuario_id', $usuario->id)
             ->update([
-                'estado_postulacion' => 'Cancelado',
                 'estado' => 0
             ]);
 

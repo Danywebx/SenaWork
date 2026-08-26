@@ -42,7 +42,7 @@ trait FiltroBusquedaTrait
 
         $categorias = Categoria::all();
         $empleos = Empleo::where('usuario_id', '!=', $userId)
-            ->where('estado_empleo', 'Publicado')
+            ->where('estado', 'Publicado')
             ->where('estado', 1);
 
 

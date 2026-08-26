@@ -107,7 +107,7 @@ class UsuarioController extends Controller
                 'tipo' => $tipo,
                 'ruta' => $ruta,
                 'usuario_id' => $usuario->id,
-                'estado_doc' => 'Aprobado',
+                'estado' => 'Aprobado',
             ]);
         }
 
@@ -222,7 +222,7 @@ class UsuarioController extends Controller
         $categorias = Categoria::all();
 
         $empleos = Empleo::where('estado', 1)
-            ->where('estado_empleo', 'Publicado')
+            ->where('estado', 'Publicado')
             ->get();
 
         return view('invitado', compact('categorias', 'empleos'));

@@ -26,7 +26,6 @@ return new class extends Migration
             $table->string('contrasena', 1000);
             $table->string('foto', 1000)->nullable();
             $table->double('prom_puntuaciones')->default(1);
-            $table->string('api_key', 500)->unique();
             $table->boolean('estado_perfil')->default(1);
             $table->unsignedBigInteger('rol_id');
             $table->unsignedBigInteger('categoria_id');

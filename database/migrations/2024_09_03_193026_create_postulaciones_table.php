@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('postulaciones', function (Blueprint $table) {
             $table->id('id');
             $table->date('fecha_inicio');
-            $table->date('fecha_cierre');
+            $table->date('fecha_cierre')->default(null);
             $table->string('estado_postulacion', 40);
-            $table->integer('puntuacion_empleado');
-            $table->string('comentario_empleado', 2000);
-            $table->integer('puntuacion_empleador');
-            $table->string('comentario_empleador', 2000);
+            $table->integer('puntuacion_empleado')->default(null);
+            $table->string('comentario_empleado', 2000)->default(null);
+            $table->integer('puntuacion_empleador')->default(null);
+            $table->string('comentario_empleador', 2000)->default(null);
             $table->unsignedBigInteger('usuario_id');
             $table->unsignedBigInteger('empleo_id');
             $table->boolean('estado')->default(1);

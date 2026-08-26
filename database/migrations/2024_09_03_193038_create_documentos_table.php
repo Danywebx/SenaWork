@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('documentos', function (Blueprint $table) {
             $table->id('id');
             $table->string('tipo', 50);
-            $table->unsignedBigInteger('numero');
             $table->string('ruta', 1000);
             $table->unsignedBigInteger('usuario_id');
-            $table->boolean('estado')->default(1);
+            $table->string('estado', 50);
 
             $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
         });
