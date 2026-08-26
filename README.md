@@ -11,14 +11,22 @@ SenaWork es una plataforma digital orientada a conectar empleadores y trabajador
 El proyecto busca proporcionar un espacio digital que facilite la comunicación entre ambas partes y mejore el acceso a oportunidades de empleo, especialmente para personas que cuentan con experiencia empírica o que no disponen de una titulación académica formal.
 
 
+## Tecnologías ⚙️
+
+- **Backend:** Laravel 11 (PHP 8.2)
+- **Frontend:** Bootstrap
+- **Base de Datos:** MySQL 8.0
+- **Herramientas & Entorno:** Git, Composer, XAMPP, VS Code
+
+
 ## Requisitos 🛠️
 
 Para ejecutar el proyecto localmente se requiere contar con:
 
 - Git
 - Composer
-- Laravel 11
-- PHP 8.2 y MySQL (Puedes utilizar Xampp)
+- PHP 8.2+
+- MySQL 8.0 (Puedes utilizar Xampp)
 
 
 ## Ejecutar localmente 🚀
@@ -64,10 +72,10 @@ Generar la clave de la aplicación
   php artisan key:generate
 ```
 
-Ejecutar migraciones
+Ejecutar migraciones y seeders
 
 ```bash 
-  php artisan migrate
+  php artisan migrate --seed
 ```
 
 Iniciar servidor
@@ -75,6 +83,17 @@ Iniciar servidor
 ```bash 
   php artisan serve
 ```
+
+
+## Pruebas QA 🧪
+
+Para garantizar la estabilidad, funcionalidad e integridad de SenaWork, se diseñó y ejecutó una estrategia de pruebas integral documentada en la carpeta [qa-docs](./qa-docs):
+
+- [Plan de pruebas](./qa-docs/01-test-plan.md)
+- [Casos de prueba](./qa-docs/02-test-cases.md)
+- [Reporte de Bugs](./qa-docs/03-bug-reports.md)
+
+
 ## Autores ✒️
 
 Proyecto desarrollado como parte del proceso de formación en Análisis y Desarrollo de Software (ADSO).
