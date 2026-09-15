@@ -87,6 +87,8 @@ Iniciar servidor
 
 ## Pruebas QA 🧪
 
+  ![Playwright Tests](https://github.com/Danywebx/SenaWork/actions/workflows/playwright.yml/badge.svg)
+
 Para garantizar la estabilidad, funcionalidad e integridad de SenaWork, se diseñó y ejecutó una estrategia de pruebas integral documentada en la carpeta [qa-docs](./qa-docs):
 
 - [Plan de pruebas](./qa-docs/01-test-plan.md)
