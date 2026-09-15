@@ -1,5 +1,5 @@
-import { RegisterPage } from '../page-objects/RegisterPage';
 import { test, expect } from '@playwright/test';
+import { RegisterPage } from '../page-objects/RegisterPage';
 
 test.beforeEach(async ({ page }) => {
     await test.step('Ir a la página de registro', async () => {

@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             'direccion' => 'Calle lejos',
             'correo' => 'test@gmail.com',
             'contrasena' => '12345678',
-            'rol_id' => 1,
+            'rol_id' => 2,
             'categoria_id' => 15,
             
             ],            
