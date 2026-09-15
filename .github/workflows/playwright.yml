@@ -1,27 +1,85 @@
-name: Playwright Tests
+name: Playwright E2E Tests
+
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main ]
+
 jobs:
   test:
-    timeout-minutes: 60
     runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: senawork
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+          
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
       with:
-        node-version: lts/*
-    - name: Install dependencies
-      run: npm install -g pnpm && pnpm install
-    - name: Install Playwright Browsers
+        php-version: '8.2'
+    
+    - name: Install Composer dependencies
+      run: composer install --no-interaction --prefer-dist
+    
+    - name: Copy .env
+      run: cp .env.example .env
+    
+    - name: Configurar variables de entorno para MySQL
+      run: |
+        sed -i 's/DB_HOST=.*/DB_HOST=127.0.0.1/' .env
+        sed -i 's/DB_DATABASE=.*/DB_DATABASE=senawork/' .env
+        sed -i 's/DB_USERNAME=.*/DB_USERNAME=root/' .env
+        sed -i 's/DB_PASSWORD=.*/DB_PASSWORD=root/' .env
+    
+    - name: Generar clave de aplicación
+      run: php artisan key:generate    
+
+    - name: Ejecutar migraciones y seeders
+      run: php artisan migrate --seed
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'pnpm'
+
+    - name: Instalar dependencias de Node
+      run: pnpm install
+    
+    - name: Compilar frontend (Vite)
+      run: pnpm build
+
+    - name: Instalar navegadores de Playwright
       run: pnpm exec playwright install --with-deps
-    - name: Run Playwright tests
+
+    - name: Correr tests E2E
       run: pnpm exec playwright test
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
+      env:
+        CI: true
+
+    - name: Subir reporte HTML
+      uses: actions/upload-artifact@v4
+      if: always()
       with:
         name: playwright-report
         path: playwright-report/
-        retention-days: 30
+        retention-days: 14
