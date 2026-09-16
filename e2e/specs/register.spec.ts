@@ -95,9 +95,18 @@ test.describe('Registro de usuario', () => {
         await test.step('Aceptar términos, petición post de crear cuenta y mensaje de error', async () => {
             await registerPage.aceptarTerms();
             await expect(page.getByRole('checkbox', { name: 'Acepto los términos y' })).toBeChecked();
-
             await registerPage.enviar();
             await expect(page.locator('.alert')).toHaveText('The numero documento has already been taken.');
+        });
+    })
+
+    test('Registrar usuario con datos incompletos', async ({ page }) => {
+        const registerPage = new RegisterPage(page);
+
+        await test.step('Petición post de crear cuenta con mensajes de error', async () => {
+            await registerPage.enviar();
+            await expect(page.getByText(/Por favor ingrese/).first()).toBeVisible();
+            await expect(page).toHaveURL(/registro/);
         });
     })
 });
