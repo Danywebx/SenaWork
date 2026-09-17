@@ -26,4 +26,17 @@ test.describe('Tests de la página perfil', () => {
             await expect(page.getByRole('button', { name: 'Completar perfil' })).not.toBeVisible();
         })
     })
+
+    test('Eliminar cuenta', async ({ page }) => {
+        const profilePage = new ProfilePage(page);
+
+        await test.step('Eliminar cuenta', async () => {
+            await profilePage.eliminarCuenta();
+        })
+
+        await test.step('Verificar que el proceso haya sido exitoso', async () => {
+            await expect(page).toHaveURL(/inicio/);
+            await expect(page.getByText('Iniciar sesión Registrarse')).toBeVisible();
+        })
+    })
 })
