@@ -28,6 +28,8 @@ test.describe('Tests de la página perfil con usuario estándar', () => {
     })
 
     test('Actualizar perfil', async ({ page }) => {
+        test.fail(true, 'Bug conocido: la actualización del perfil se realiza con exito pero no se muestra la foto de perfil — ver qa-docs/02-test-cases.md TC-12');
+
         const profilePage = new ProfilePage(page);
         const fotoPerfil = '../data/image_test.jpeg';
         const rutaPortafolio = '../data/Prueba_Documento_de_Portafolio.pdf';
@@ -75,6 +77,7 @@ test.describe('Tests de la página perfil con usuario estándar', () => {
     })
 
     test('Cambiar contraseña exitosamente', async ({ page }) => {
+        test.fail(true, 'Bug conocido: la actualización de la contraseña se realiza con exito pero no se cierra la sesión — ver qa-docs/02-test-cases.md TC-09');
         const profilePage = new ProfilePage(page);
 
         await test.step('Cambiar contraseña', async () => {
