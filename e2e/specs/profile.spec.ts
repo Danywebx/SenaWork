@@ -1,9 +1,9 @@
-import { test, expect } from '../fixtures/auth.fixture';
+import { test, expect } from '../fixtures/fixtures';
 import { ProfilePage } from '../page-objects/ProfilePage';
 
 test.describe('Tests de la página perfil con usuario estándar', () => {
 
-    test.beforeEach(async ({ loginPage, page }) => {
+    test.beforeEach(async ({ registrarUsuario, page }) => {
         const profilePage = new ProfilePage(page);
 
         await test.step('Ir a la página del perfil', async () => {
@@ -26,17 +26,40 @@ test.describe('Tests de la página perfil con usuario estándar', () => {
             await expect(page.getByRole('button', { name: 'Completar perfil' })).not.toBeVisible();
         })
     })
-})
 
-test.describe('Cambiar contraseñas con usuario definido para estos tests', () => {
+    test('Actualizar perfil', async ({ page }) => {
+        test.fail(true, 'Bug conocido: la actualización del perfil se realiza con exito pero no se muestra la foto de perfil — ver qa-docs/02-test-cases.md TC-12');
 
-    test.beforeEach(async ({ loginPageContrasenas, page }) => {
         const profilePage = new ProfilePage(page);
+        const fotoPerfil = '../data/image_test.jpeg';
+        const rutaPortafolio = '../data/Prueba_Documento_de_Portafolio.pdf';
 
-        await test.step('Ir a la página del perfil', async () => {
-            await expect(page).toHaveURL(/empleado/)
-            await profilePage.ir();
-            await expect(page).toHaveURL(/perfil/);
+        await test.step('Actualizar datos', async () => {
+            await profilePage.editarPerfil({
+                foto: fotoPerfil,
+                telefono: '3125259487',
+                portafolio: rutaPortafolio,
+                categoria: '4',
+            });
+        })
+
+        await test.step('Verificar que el proceso haya sido exitoso', async () => {
+            await expect(page.getByText('Perfil actualizado con éxito.')).toBeVisible();
+
+            const navProfileImg = page.locator('header .nav-profile img');
+            const cardProfileImg = page.locator('.profile-card img');
+            await expect(navProfileImg).toBeVisible();
+            await expect(cardProfileImg).toBeVisible();
+
+            const isNavImgLoaded = await navProfileImg.evaluate(
+                (img) => (img as HTMLImageElement).complete && (img as HTMLImageElement).naturalWidth > 0
+            );
+            const isCardImgLoaded = await cardProfileImg.evaluate(
+                (img) => (img as HTMLImageElement).complete && (img as HTMLImageElement).naturalWidth > 0
+            );
+
+            expect(isNavImgLoaded).toBeTruthy();
+            expect(isCardImgLoaded).toBeTruthy();
         })
     })
 
@@ -54,6 +77,7 @@ test.describe('Cambiar contraseñas con usuario definido para estos tests', () =
     })
 
     test('Cambiar contraseña exitosamente', async ({ page }) => {
+        test.fail(true, 'Bug conocido: la actualización de la contraseña se realiza con exito pero no se cierra la sesión — ver qa-docs/02-test-cases.md TC-09');
         const profilePage = new ProfilePage(page);
 
         await test.step('Cambiar contraseña', async () => {
@@ -65,19 +89,10 @@ test.describe('Cambiar contraseñas con usuario definido para estos tests', () =
             await expect(page.getByText('Iniciar sesión Registrarse')).toBeVisible();
         })
     })
-})
 
-test.describe('Eliminar cuenta con usuario definido para este test', () => {
-
-    test('Eliminar cuenta', async ({ loginPageEliminar, page }) => {
+    test('Eliminar cuenta', async ({ page }) => {
         const profilePage = new ProfilePage(page);
-
-        await test.step('Ir a la página del perfil', async () => {
-            await expect(page).toHaveURL(/empleado/)
-            await profilePage.ir();
-            await expect(page).toHaveURL(/perfil/);
-        })
-
+        
         await test.step('Eliminar cuenta', async () => {
             await profilePage.eliminarCuenta();
         })

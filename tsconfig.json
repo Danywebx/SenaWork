@@ -20,6 +20,7 @@
         "specs/**/*.ts",
         "fixtures/**/*.ts",
         "page-objects/**/*.ts",
-        "playwright.config.ts"
+        "playwright.config.ts",
+        "global-setup.ts"
     ]
 }
