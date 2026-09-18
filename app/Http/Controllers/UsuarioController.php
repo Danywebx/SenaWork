@@ -149,8 +149,7 @@ class UsuarioController extends Controller
                     'tipo' => 'portafolio',
                     'ruta' => $rutaNueva,
                     'usuario_id' => $user->id,
-                    'estado_doc' => 'activo',
-                    'estado' => 1
+                    'estado' => 'Aprobado',
                 ]);
             }
         }

@@ -1,14 +1,15 @@
 import { test, expect } from '@playwright/test';
 import { RegisterPage } from '../page-objects/RegisterPage';
 
-test.beforeEach(async ({ page }) => {
-    await test.step('Ir a la página de registro', async () => {
-        const registerPage = new RegisterPage(page);
-        await registerPage.ir();
-    })
-})
-
 test.describe('Registro de usuario', () => {
+
+    test.beforeEach(async ({ page }) => {
+        await test.step('Ir a la página de registro', async () => {
+            const registerPage = new RegisterPage(page);
+            await registerPage.ir();
+        })
+    })
+
     test('Registrar usuario exitosamente', async ({ page }) => {
         const registerPage = new RegisterPage(page);
         const min = 1e9;
