@@ -39,4 +39,22 @@ test.describe('Tests de la página Mis empleos - Rol Empleador', () => {
             await expect(page.getByText(nombreUnico).first()).toBeVisible();
         })
     })
+
+    test('Crear empleo con formulario incompleto', async ({ page }) => {
+        const misEmpleosPage = new MisEmpleosPage(page);
+        
+        await test.step('Ir a crear empleo', async () => {
+            await misEmpleosPage.irCrearEmpleo();
+            await expect(page).toHaveURL(/crear_empleo/);
+        })
+
+        await test.step('Enviar el formulario vacío', async () => {
+            await misEmpleosPage.enviarEmpleo();
+        })
+
+        await test.step('Verificar que se muestren los mensajes de error en el formulario', async () => {
+            await expect(page).toHaveURL(/crear_empleo/);
+            await expect(page.getByText(/Por favor ingrese/).first()).toBeVisible();
+        })
+    })
 })
