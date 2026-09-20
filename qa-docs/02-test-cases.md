@@ -1,24 +1,52 @@
-# 🧪 Matriz de Casos de Prueba (Test Cases)
+# Matriz de casos de prueba
 
-| ID | Módulo | Descripción / Escenario | Pre-requisitos | Pasos para Reproducir | Resultado Esperado | Estado |
-| :--- | :--- | :--- | :--- | :--- | :--- | :---: |
-| **TC-01** | Autenticación | Registro de usuario | No estar previamente registrado en el sistema | 1. Ir a `/registro`<br>2. Completar el formulario con la información requerida<br>3. Hacer click en "Crear cuenta" | El sistema debe redirigir al inicio e iniciar sesión | **PASS** |
-| **TC-02** | Autenticación | Registro de usuario con correo duplicado | Existencia de un usuario con el correo a usar | 1. Ir a `/registro`<br>2. Ingresar un correo ya registrado<br>3. Hacer click en Crear cuenta | El sistema debe mostrar el mensaje de validación: *"The email has already been taken"* | **PASS** |
-| **TC-03** | Autenticación | Registro de usuario con número de documento duplicado | Existencia de un usuario con el número de documento a usar | 1. Ir a `/registro`<br>2. Ingresar un número de documento ya registrado<br>3. Hacer click en Crear cuenta | El sistema debe mostrar el mensaje de validación: *"The numero documento has already been taken"* | **PASS** |
-| **TC-04** | Autenticación | Registro de usuario con datos incompletos | N/A | 1. Ir a `/registro`<br>2. No ingresar información en el formulario <br> 3. Hacer click en Crear cuenta | El sistema no envía el formulario y debe mostrar los mensajes de validación en cada campo del formulario | **PASS** |
-| **TC-05** | Autenticación | Iniciar sesión | Estar registrado en el sistema | 1. Ir a `/login`<br>2. Ingresar correo y contraseña<br>3. Hacer click en Iniciar Sesión | El sistema debe redirigir al inicio y haber iniciado sesión| **PASS** |
-| **TC-06** | Autenticación | Iniciar sesión con credenciales incorrectas | Usar credenciales inexistentes | 1. Ir a `/login`<br>2. Ingresar un correo o contraseña incorrecta<br>3. Hacer click en Iniciar Sesión | El sistema debe mostrar el mensaje de validación: *"Credenciales incorrectas"* | **PASS** |
-| **TC-07** | Autenticación | Cerrar sesión | Tener la sesión activa en el sistema | 1. Acceder al menu dropdown de la barra de navegación/header <br> 2. Hacer click en Cerrar sesión | El sistema debe redirigir a la página principal y haber cerrado la sesión | **PASS** |
-| **TC-08** | Autenticación | Eliminar cuenta de usuario | Tener la sesión activa en el sistema | 1. Ir a Mi perfil `/perfil` <br>2. Dar click en el botón Eliminar cuenta <br>3. Dar click en el botón Aceptar del modal | El sistema debe redirigir a la página principal, haber cerrado la sesión y haber eliminado la cuenta | **PASS** |
-| **TC-09** | Autenticación | Cambiar contraseña | Tener la sesión activa en el sistema | 1. Ir a Cambiar contraseña `/perfil` <br> 2. Completar el formulario con la información requerida <br>3. Dar click en el botón Cambiar contraseña | El sistema debe cerrar la sesión, redirigir a la paǵina principal y haber actualizado la contraseña del usuario | **NO PASS** |
-| **TC-10** | Autenticación | Cambiar contraseña con contraseña actual errónea | Tener la sesión activa en el sistema | 1. Ir a Cambiar contraseña `/perfil` <br> 2. Ingresar contraseña actual con datos incorrectos <br>3. Dar click en el botón Cambiar contraseña | El sistema debe mostrar el mensaje de validación: *"La contraseña actual es incorrecta"* | **PASS** |
-| **TC-11** | Perfil | Completar perfil | 1. Tener la sesión activa en el sistema <br> 2. Tener los documentos requeridos en .pdf | 1. Ir a Mi perfil `/perfil` <br> 2. Dar click en el botón Completar perfil <br> 3. Subir los documentos que solicita el modal <br>4. Hacer click en Enviar | El sistema debe redirigir a Mi perfil `/perfil`, haber subido los documentos y ya no debe ser visible el botón Completar perfil | **PASS** |
-| **TC-12** | Perfil | Editar perfil | 1. Tener la sesión activa en el sistema <br> 2. Tener los archivos requeridos en .pdf y fomato de imagen | 1. Ir a Editar Perfil `/perfil` <br> 2. Completar el formulario <br> 3. Dar click en el botón Guardar cambios | El sistema debe redirigir a Mi perfil `/perfil` y haber cargado la nueva información (imagen, datos, documento) | **NO PASS** |
-| **TC-13** | Perfil | Cambiar tipo de usuario (rol) | 1. Tener la sesión activa en el sistema <br> 2. Haber completado el perfil | 1. Acceder al menu sidebar <br> 2. Dar click en el botón Empleado o Empleador | El sistema debe redirigir al inicio `/empleado` o `/empleador` dependiendo del rol seleccionado | **PASS** |
-| **TC-14** | Vacantes | Creación de un empleo | 1. Tener la sesión activa como Empleador <br> 2. Haber completado el perfil | 1. Ir a Crear Empleo `/crear_empleo`<br>2. Completar el formulario<br>3. Hacer click en Enviar | El sistema debe redirigir a Mis empleos `/empleos`, mostrar el mensaje de validación: *"Empleo creado exitosamente"* y mostrar el empleo en la lista | **PASS** |
-| **TC-15** | Vacantes | Creación de empleo con formulario incompleto | 1. Tener la sesión activa como Empleador <br> 2. Haber completado el perfil | 1. Ir a Crear Empleo `/crear_empleo`<br> 2. Dejar campos requeridos del formulario vacíos <br> 3. Hacer click en Enviar | El formulario no se enviará, los campos del formulario requeridos se pondrán en rojo y mostrarán un mensaje solicitando los datos | **PASS** |
-| **TC-16** | Vacantes | Mostrar imagenes del empleo creado | 1. Tener la sesión activa como Empleador 2. <br> Haber completado el perfil <br> 3. Haber adjuntado alguna imágen al crear el empleo | 1. Ir a Mis empleos `/empleos` <br> 2. Dar click en el botón Ver de un empleo | El sistema debería mostrar las imágenes sí al crear el empleo se adjuntó alguna | **NO PASS** |
-| **TC-17** | Vacantes | Administrar empleo | 1. Tener la sesión activa como Empleador <br> 2. Haber completado el perfil <br> 3. Haber creado al menos 1 empleo | 1. Ir a Mis empleos `/empleos` <br> 2. Dar click en el botón Ver de un empleo <br> 3. Hacer click en el botón Administrar del modal | El sistema debe mostrar el panel administrativo del empleo | **NO PASS** |
-| **TC-18** | Postulaciones | Mostrar empleos que estén activos | 1. Tener la sesión activa como Empleado <br> 2. Haber al menos 1 empleo activo | 1. Ir al inicio `/empleado` | El sistema debe mostrar los empleos que estén activos | **NO PASS** |
-<!-- | **TC-18** | Postulaciones | Postularse a una oferta de empleo | N | 1. Iniciar sesión como Empleado <br>2. Dar click sobre alguna oferta de empleo o en el botón Ver - Aplicar <br>3. Dar click sobre el botón Aplicar del modal <br>4. Dar click en el botón Confirmar del modal | El sistema debe recargar la página, mostrar el mensaje de validación: *"Has aplicado al empleo exitosamente"* y registrar la postulación en la base de datos| **PASS** |
-| **TC-18** | Postulaciones | Postulación doble a una misma oferta | N | 1. Iniciar sesión como Empleado<br>2. Postularse a una oferta de empleo<br>3. Intentar postularse nuevamente | El botón debe deshabilitarse o mostrar el mensaje *"Ya has aplicado a este empleo"* | **PASS** | -->
+**Producto:** SenaWork · **Versión de referencia:** 1.0 · **Estado:** evidencia de la última ejecución documentada
+
+## Resumen de cobertura
+
+| Indicador | Resultado |
+| --- | ---: |
+| Casos documentados | 18 |
+| PASS | 13 |
+| FAIL / defecto conocido | 5 |
+| Automatizados directamente | 13 |
+| No automatizados actualmente | 5 |
+
+> `PASS` y `FAIL` describen la última evidencia registrada. Los casos marcados como `KNOWN BUG` se conservan en la suite para hacer visible la deuda de calidad.
+
+| ID | Módulo | Escenario | Precondiciones | Resultado esperado | Automatización | Estado |
+| --- | --- | --- | --- | --- | --- | --- |
+| TC-01 | Autenticación | Registro válido | Usuario no registrado | Crea la cuenta e inicia sesión | `register.spec.ts` | PASS |
+| TC-02 | Autenticación | Registro con correo duplicado | Correo existente | Muestra validación de correo único | `register.spec.ts` | PASS |
+| TC-03 | Autenticación | Registro con documento duplicado | Documento existente | Muestra validación de documento único | `register.spec.ts` | PASS |
+| TC-04 | Autenticación | Registro incompleto | Formulario vacío | Impide envío y muestra validaciones | `register.spec.ts` | PASS |
+| TC-05 | Autenticación | Inicio de sesión válido | Usuario semilla activo | Redirige al área según rol | `login.spec.ts` | PASS |
+| TC-06 | Autenticación | Credenciales incorrectas | Credenciales inválidas | Muestra mensaje de error | `login.spec.ts` | PASS |
+| TC-07 | Autenticación | Cierre de sesión | Sesión activa | Cierra sesión y vuelve a inicio | `inicio.spec.ts` | PASS |
+| TC-08 | Cuenta | Eliminar cuenta | Sesión activa | Elimina cuenta y cierra sesión | `profile.spec.ts` | PASS |
+| TC-09 | Cuenta | Cambiar contraseña | Sesión activa y contraseña válida | Actualiza contraseña y cierra sesión | `profile.spec.ts` | KNOWN BUG · BUG-007 |
+| TC-10 | Cuenta | Contraseña actual incorrecta | Sesión activa | Conserva cuenta y muestra error | `profile.spec.ts` | PASS |
+| TC-11 | Perfil | Completar perfil | Documentos PDF disponibles | Guarda documentos y completa el perfil | `profile.spec.ts` | PASS |
+| TC-12 | Perfil | Actualizar perfil | Sesión activa y archivos válidos | Guarda datos y muestra la imagen actualizada | `profile.spec.ts` | KNOWN BUG · BUG-004 |
+| TC-13 | Perfil | Cambiar rol | Perfil completado | Redirige al área del rol seleccionado | `inicio.spec.ts` | PASS |
+| TC-14 | Vacantes | Crear empleo | Empleador con perfil completo | Crea y lista la oferta | `mis-empleos.spec.ts` | PASS |
+| TC-15 | Vacantes | Crear empleo incompleto | Empleador con perfil completo | Impide envío y muestra validaciones | Manual | PASS |
+| TC-16 | Vacantes | Ver imagen del empleo | Oferta creada con imagen | Muestra la imagen cargada | Manual | KNOWN BUG · BUG-005 |
+| TC-17 | Vacantes | Administrar empleo | Empleador con oferta propia | Muestra acciones administrativas | Manual | KNOWN BUG · BUG-006 |
+| TC-18 | Búsqueda | Mostrar y filtrar empleos activos | Empleado y ofertas activas | Lista ofertas y filtra por categoría/palabra | Manual | KNOWN BUG · BUG-001/002/003 |
+
+## Detalle de ejecución
+
+Para repetir la suite:
+
+```bash
+pnpm exec playwright test
+```
+
+Para un caso automatizado concreto:
+
+```bash
+pnpm exec playwright test --grep "Cambiar contraseña|Actualizar perfil"
+```
+
+Los mensajes y selectores esperados deben mantenerse alineados con los Page Objects y las vistas. Cuando un defecto se corrija, retira el `test.fail` correspondiente, ejecuta la prueba y actualiza esta matriz y el reporte relacionado.
