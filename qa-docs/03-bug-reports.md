@@ -1,110 +1,105 @@
-# 🐛 Reporte de Fallos (Bug Reports)
+# Reportes de defectos
 
-### BUG-001: No se muestran los empleos activos desde la página de inicio
-- **Severidad:** Alta | **Prioridad:** Alta
-- **Descripción:** Al acceder a la página de inicio no se muestran los empleos activos.
-- **Rol:** Empleado.
-- **Entorno:** Local / Navegador Brave 1.93 / MySQL 8.0
-- **Precondiciones:** Existir 1 o más empleos registrados que estén activos y estar logueado.
-- **Pasos para reproducir:**
-  1. Iniciar sesión como Empleado.
-  2. Acceder a la página de Inicio.
-- **Resultado Esperado:** Mostrar todos los empleos que estén activos.
-- **Resultado Obtenido:** No se muestra ni un solo empleo.
-- **Captura de pantalla:**
-![image1](./screenshots/Screenshot%20From%202026-08-25%2001-05-07.png)
-<br>
+**Producto:** SenaWork · **Ambiente de referencia:** local/CI, MySQL 8.0, Chromium · **Convención:** severidad = impacto, prioridad = urgencia de corrección
 
+## Resumen
 
-### BUG-002: No se muestran los empleos al filtrarlos por categoría
-- **Severidad:** Alta | **Prioridad:** Alta
-- **Descripción:** Al seleccionar una categoría y dar "Enter" o click en el botón de buscar no se muestran los empleos que pertenecen a esta categoría y estan activos.
-- **Rol:** Empleado.
-- **Entorno:** Local / Navegador Brave 1.93 / MySQL 8.0
-- **Precondiciones:** Existir 1 o más empleos que pertenezcan a la categoría seleccionada, que estos empleos estén activos y estar logueado.
-- **Pasos para reproducir:**
-  1. Iniciar sesión como Empleado.
-  2. Acceder a la página de Inicio.
-  3. Seleccionar una de las categorías disponibles.
-  4. Dar "Enter" o click en el botón de busqueda.
-- **Resultado Esperado:** Mostrar todos los empleos activos que pertenecen a la categoría seleccionada.
-- **Resultado Obtenido:** No se muestra ni un solo empleo.
-- **Captura de pantalla:**
-![image2](./screenshots/Screenshot%20From%202026-08-25%2002-10-37.png)
-<br>
+| Estado | Cantidad |
+| --- | ---: |
+| Abiertos | 7 |
+| Cerrados | 0 |
+| Total documentado | 7 |
 
+## BUG-001 — No se muestran empleos activos
 
-### BUG-003: El filtro de palabra clave no muestra resultados al buscar un empleo por su nombre
-- **Severidad:** Alta | **Prioridad:** Alta
-- **Descripción:** Al escribir el nombre de un empleo en el filtro de palabra clave no se muestra ningún resultado, pero si se escribe una pequeña parte de la descripción si se muestra.
-- **Rol:** Empleado.
-- **Entorno:** Local / Navegador Brave 1.93 / MySQL 8.0
-- **Precondiciones:** Existir 1 o más empleos que contengan la misma palabra en su nombre, que estos empleos estén activos y estar logueado.
-- **Pasos para reproducir:**
-  1. Iniciar sesión como Empleado.
-  2. Acceder a la página de Inicio.
-  3. Escribir la palabra clave en el filtro de busqueda.
-  4. Dar "Enter" o click en el botón de busqueda.
-- **Resultado Esperado:** Mostrar todos los empleos activos que en su nombre contengan la palabra clave que se buscó en el filtro.
-- **Resultado Obtenido:** No se muestra ni un solo empleo.
-- **Captura de pantalla:**
-![image3](./screenshots/Screenshot%20From%202026-08-25%2002-09-23.png)
-<br>
+- **Severidad / prioridad:** Alta / Alta
+- **Módulo:** Búsqueda de empleos
+- **Rol:** Empleado
+- **Precondiciones:** Sesión activa y al menos una oferta activa.
+- **Pasos:** Iniciar sesión como Empleado y abrir `/empleado`.
+- **Esperado:** Se listan todas las ofertas activas.
+- **Obtenido:** La lista aparece vacía.
+- **Trazabilidad:** TC-18
+- **Evidencia:** [captura](./screenshots/Screenshot%20From%202026-08-25%2001-05-07.png)
+- **Estado:** Abierto
 
+## BUG-002 — El filtro por categoría no devuelve resultados
 
-### BUG-004: No se muestra la imagen de perfil
-- **Severidad:** Media | **Prioridad:** Media
-- **Descripción:** Al cargar y actualizar una foto de perfil, está no se muestra.
-- **Rol:** Empleado/Empleador.
-- **Entorno:** Local / Navegador Brave 1.93 / MySQL 8.0
-- **Precondiciones:** Seleccionar una imagen y estar logueado.
-- **Pasos para reproducir:**
-  1. Iniciar sesión como Empleado o Empleador.
-  2. Acceder a la página del perfil.
-  3. Ir a la sección "Editar Perfil".
-  4. Dar click en el botón "Subir".
-  5. Seleccionar una imagen.  
-  6. Dar click en el botón "Guardar cambios".
-- **Resultado Esperado:** La página se debe recargar y se debe presentar la imagen de perfil actualizada en los espacios correspondientes.
-- **Resultado Obtenido:** No se muestra la imagen de perfil en ningun espacio.
-- **Captura de pantalla:**
-![image4](./screenshots/Screenshot%20From%202026-08-25%2002-30-40.png)
-<br>
+- **Severidad / prioridad:** Alta / Alta
+- **Módulo:** Búsqueda de empleos
+- **Rol:** Empleado
+- **Precondiciones:** Existe una oferta activa de la categoría seleccionada.
+- **Pasos:** Abrir `/empleado`, seleccionar una categoría y buscar.
+- **Esperado:** Se muestran las ofertas activas de esa categoría.
+- **Obtenido:** No se muestran resultados.
+- **Trazabilidad:** TC-18
+- **Evidencia:** [captura](./screenshots/Screenshot%20From%202026-08-25%2002-10-37.png)
+- **Estado:** Abierto
 
+## BUG-003 — La búsqueda por nombre no devuelve resultados
 
-### BUG-005: No se muestra la imagen del empleo al crearlo
-- **Severidad:** Media | **Prioridad:** Media
-- **Descripción:** Al cargar y publicar un empleo la imagen no se muestra.
-- **Rol:** Empleador.
-- **Entorno:** Local / Navegador Brave 1.93 / MySQL 8.0
-- **Precondiciones:** Seleccionar una imagen y estar logueado.
-- **Pasos para reproducir:**
-  1. Iniciar sesión como Empleador.
-  2. Acceder a la página "Mis empleos".
-  3. Dar click en el botón "Crear Empleo".
-  4. Registrar el formulario.
-  5. Seleccionar una imagen.  
-  6. Dar click en el botón "Enviar".
-  7. Ver el empleo creado.
-- **Resultado Esperado:** Al crear el empleo el sistema te debe redirigir a la página "Mis empleos", y al revisar el empleo creado debería poderse visualizar la imagen previamente cargada en el formulario.
-- **Resultado Obtenido:** No se muestra la imagen del empleo.
-- **Captura de pantalla:**
-![image4](./screenshots/Screenshot%20From%202026-08-25%2002-40-31.png)
-<br>
+- **Severidad / prioridad:** Alta / Alta
+- **Módulo:** Búsqueda por palabra clave
+- **Rol:** Empleado
+- **Precondiciones:** Existe una oferta activa cuyo nombre contiene la palabra buscada.
+- **Pasos:** Abrir `/empleado`, escribir el nombre o parte del nombre y buscar.
+- **Esperado:** Se muestran las ofertas cuyo nombre coincide.
+- **Obtenido:** La búsqueda por nombre no devuelve resultados; la descripción puede comportarse de forma distinta.
+- **Trazabilidad:** TC-18
+- **Evidencia:** [captura](./screenshots/Screenshot%20From%202026-08-25%2002-09-23.png)
+- **Estado:** Abierto
 
+## BUG-004 — La imagen de perfil no se visualiza después de actualizarla
 
-### BUG-006: No se puede acceder a la administración de empleo
-- **Severidad:** Alta | **Prioridad:** Alta
-- **Descripción:** Al acceder a la información de un empleo no se muestra el botón "Administrar".
-- **Rol:** Empleador.
-- **Entorno:** Local / Navegador Brave 1.93 / MySQL 8.0
-- **Precondiciones:** Existir 1 o más empleos creados por el usuario, que estos empleos estén activos y estar logueado.
-- **Pasos para reproducir:**
-  1. Iniciar sesión como Empleador.
-  2. Acceder a la página "Mis empleos".
-  3. Dar click sobre un empleo o en el botón "Ver".  
-- **Resultado Esperado:** Al acceder a la información del empleo se debe mostrar un botón "Administrar" que te permitirá tomar acciones administrativas sobre este empleo, tales como: Editar, ver candidatos, filtrar candidatos, seleccionar candidato, eliminar empleo.
-- **Resultado Obtenido:** No se muestra el botón "Administrar".
-- **Captura de pantalla:**
-![image4](./screenshots/Screenshot%20From%202026-08-25%2002-40-31.png)
-<br>
+- **Severidad / prioridad:** Media / Media
+- **Módulo:** Perfil
+- **Roles:** Empleado y Empleador
+- **Precondiciones:** Sesión activa y una imagen válida.
+- **Pasos:** Abrir `/perfil`, editar perfil, cargar una imagen y guardar.
+- **Esperado:** La imagen se muestra en la navegación y en la tarjeta del perfil.
+- **Obtenido:** La actualización informa éxito, pero la imagen no se visualiza.
+- **Trazabilidad:** TC-12; `e2e/specs/profile.spec.ts` lo marca como `test.fail`.
+- **Evidencia:** [captura](./screenshots/Screenshot%20From%202026-08-25%2002-30-40.png)
+- **Estado:** Abierto
+
+## BUG-005 — La imagen de una oferta no se visualiza
+
+- **Severidad / prioridad:** Media / Media
+- **Módulo:** Publicación de empleos
+- **Rol:** Empleador
+- **Precondiciones:** Sesión activa, perfil completo y una imagen válida.
+- **Pasos:** Crear una oferta desde `/crear_empleo` con imagen y abrirla desde `/empleos`.
+- **Esperado:** La oferta muestra la imagen cargada.
+- **Obtenido:** La oferta se crea, pero la imagen no se muestra.
+- **Trazabilidad:** TC-16
+- **Evidencia:** [captura](./screenshots/Screenshot%20From%202026-08-25%2002-40-31.png)
+- **Estado:** Abierto
+
+## BUG-006 — No se muestra la administración de una oferta
+
+- **Severidad / prioridad:** Alta / Alta
+- **Módulo:** Administración de empleos
+- **Rol:** Empleador
+- **Precondiciones:** El usuario tiene una oferta activa propia.
+- **Pasos:** Abrir `/empleos`, seleccionar una oferta y consultar su detalle.
+- **Esperado:** Se muestra el botón `Administrar` con acciones sobre la oferta.
+- **Obtenido:** El botón no aparece.
+- **Trazabilidad:** TC-17
+- **Evidencia:** [captura](./screenshots/Screenshot%20From%202026-08-25%2002-40-31.png)
+- **Estado:** Abierto
+
+## BUG-007 — Cambiar contraseña no cierra la sesión
+
+- **Severidad / prioridad:** Alta / Alta
+- **Módulo:** Seguridad de cuenta
+- **Rol:** Usuario autenticado
+- **Precondiciones:** Sesión activa y contraseña actual válida.
+- **Pasos:** Abrir `/perfil`, cambiar la contraseña y enviar el formulario.
+- **Esperado:** Se actualiza la contraseña, se invalida la sesión y se redirige a `/inicio`.
+- **Obtenido:** La operación se ejecuta, pero la sesión no se cierra como se espera.
+- **Trazabilidad:** TC-09; `e2e/specs/profile.spec.ts` lo marca como `test.fail`.
+- **Estado:** Abierto
+
+## Criterio de cierre
+
+Un defecto se considera cerrado cuando existe una corrección integrada, el caso original pasa, se ejecuta una regresión del módulo afectado y la evidencia de esta matriz se actualiza.
